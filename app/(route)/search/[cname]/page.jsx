@@ -9,8 +9,8 @@ function Search({ params }) {
   useEffect(() => {
     // console.log(params.cname);
     const getDoctors = () => {
-      GlobalApi.getDoctorByCategory(params.cname).then((resp) => {
-        // console.log("All ", params.cname, " = ", resp.data.data);
+      GlobalApi.getDoctorByCategory(decodeURIComponent(params.cname)).then((resp) => {
+        // console.log("All ", decodeURIComponent(params.cname), " = ", resp.data.data);
         setDoctorList(resp.data.data);
       });
     };
@@ -19,7 +19,7 @@ function Search({ params }) {
   
   return (
     <div className="mt-5">
-      <DoctorList heading={params.cname} doctorList={doctorList} />
+      <DoctorList heading={decodeURIComponent(params.cname)} doctorList={doctorList} />
     </div>
   );
 }

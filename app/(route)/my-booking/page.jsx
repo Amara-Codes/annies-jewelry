@@ -7,57 +7,82 @@ import { useSession } from "@/app/sessionValidator";
 
 function MyBooking() {
   let { user } = useSession();
-  user = user?.data ; 
-
-  console.log(user?.email);
+  user = user?.data;
 
   const [bookingList, setBookingList] = useState([]);
+  const [filteredBookings, setFilteredBookings] = useState([]);
 
   useEffect(() => {
     const getUserBookingList = () => {
       GlobalApi.getUserBookingList(user?.email).then((resp) => {
-        // console.log(resp.data.data)
         setBookingList(resp.data.data);
+        setFilteredBookings(filterUserBooking(resp.data.data, "upcoming"));
       });
     };
     user && getUserBookingList();
   }, [user]);
 
   /**
-   * Used to Filter User Booking
-   * @param {} type
-   * @returns
+   * Filters bookings based on type (upcoming or expired)
+   * @param {Array} list - List of bookings
+   * @param {String} type - Type of booking (upcoming or expired)
    */
+  const filterUserBooking = (list, type) => {
 
-  const filterUserBooking = (type) => {
-    const result = bookingList.filter((item) =>
-      type == "upcoming"
+    // console.log("list = " , list);
+
+    const result =  list.filter((item) =>
+      type === "upcoming"
         ? new Date(item.attributes.Date) >= new Date()
         : new Date(item.attributes.Date) <= new Date()
     );
-    // console.log(result)
+    // console.log("filtered : " , result); 
     return result;
   };
+
+  const handleTabChange = (type) => {
+    setFilteredBookings(filterUserBooking(bookingList, type));
+  };
+
+  const updateRecord = () => {
+    GlobalApi.getUserBookingList(user?.email).then((resp) => {
+      setBookingList(resp.data.data);
+      setFilteredBookings(filterUserBooking(resp.data.data, "upcoming"));
+    });
+  };
+
   return (
     <div className="px-4 sm:px-10 mt-10">
       <h2 className="font-bold text-2xl">My Booking</h2>
       <Tabs defaultValue="upcoming" className="w-full mt-5">
         <TabsList className="w-full justify-start">
-          <TabsTrigger value="upcoming">Upcoming</TabsTrigger>
-          <TabsTrigger value="expired">Expired</TabsTrigger>
+          <TabsTrigger
+            value="upcoming"
+            onClick={() => handleTabChange("upcoming")}
+          >
+            Upcoming
+          </TabsTrigger>
+          <TabsTrigger
+            value="expired"
+            onClick={() => handleTabChange("expired")}
+          >
+            Expired
+          </TabsTrigger>
         </TabsList>
+
         <TabsContent value="upcoming">
           <BookingList
-            bookingList={filterUserBooking("upcoming")}
-            updateRecord={() => getUserBookingList()}
+            bookingList={filteredBookings}
+            updateRecord={updateRecord}
             expired={false}
           />
         </TabsContent>
+
         <TabsContent value="expired">
           <BookingList
-            bookingList={filterUserBooking("expired")}
+            bookingList={filteredBookings}
             bgGrey={true}
-            updateRecord={() => getUserBookingList()}
+            updateRecord={updateRecord}
             expired={true}
           />
         </TabsContent>

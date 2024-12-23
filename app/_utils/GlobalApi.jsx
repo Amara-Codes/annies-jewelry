@@ -4,7 +4,7 @@ import { encrypt, setCookies, logout, getSession } from "./lib";
 
 const API_KEY = process.env.NEXT_PUBLIC_STRAPI_API_KEY;
 // const baseURL = `http://localhost:1337/api`;
-const baseURL =  "https://next-appoint-strapi-backend.onrender.com/api"; 
+const baseURL = "https://next-appoint-strapi-backend.onrender.com/api";
 
 const axiosClient = axios.create({
   baseURL: baseURL,
@@ -21,6 +21,23 @@ const login = async (data) => {
     const { jwt } = response.data;
 
     const user = await getCurrentUser(jwt);
+
+    console.log("USER AFTER LOGGIN IN : ", user);
+
+    //   {
+    //     "success": true,
+    //     "data": {
+    //         "id": 13,
+    //         "username": "mehto",
+    //         "email": "mehto@gmail.com",
+    //         "provider": "local",
+    //         "confirmed": true,
+    //         "blocked": false,
+    //         "createdAt": "2024-12-22T15:22:10.993Z",
+    //         "updatedAt": "2024-12-22T15:22:10.993Z"
+    //     }
+    // }
+
     const { username, email } = user;
 
     const { identifier } = data;
@@ -37,7 +54,12 @@ const login = async (data) => {
       "An error occurred during login:",
       errorRes.response.data.error.message
     );
-    return { success: false, error: errorRes.response.data.error.message || "Oops! Some error occured in logging in." };
+    return {
+      success: false,
+      error:
+        errorRes.response.data.error.message ||
+        "Oops! Some error occured in logging in.",
+    };
   }
 };
 
@@ -55,7 +77,21 @@ const logoutAPI = async () => {
 const signup = async (data) => {
   try {
     const res = await axiosClient.post("/auth/local/register", data);
+
+    let newuser = { data: {} };
     const { jwt, user } = res.data;
+    newuser.data = user;
+
+    console.log("USER AFTER SIGNING IN : ", newuser);
+
+  //   {
+  //     "data": {
+  //         "username": "you",
+  //         "email": "you@gmail.com",
+  //         "password": "111111111"
+  //     }
+  // }
+
     const expires = new Date(Date.now() + 10 * 60 * 1000); //10 minutes
     const session = await encrypt({ jwt, user, expires });
 
@@ -63,8 +99,15 @@ const signup = async (data) => {
 
     return { success: true, data: res.data };
   } catch (errorRes) {
-    console.log("An error occurred during login:", errorRes.response.data.error.message);
-    return { success: false, error: errorRes.response.data.error.message || "Oops! Some error occured." };
+    console.log(
+      "An error occurred during login:",
+      errorRes.response.data.error.message
+    );
+    return {
+      success: false,
+      error:
+        errorRes.response.data.error.message || "Oops! Some error occured.",
+    };
   }
 };
 

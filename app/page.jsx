@@ -1,9 +1,9 @@
-'use client'
-import Hero from './_components/Hero';
-import CategorySearch from './_components/CategorySearch';
-import DoctorList from './_components/DoctorList';
-import GlobalApi from './_utils/GlobalApi';
-import { useEffect, useState } from 'react';
+"use client";
+import Hero from "./_components/Hero";
+import CategorySearch from "./_components/CategorySearch";
+import DoctorList from "./_components/DoctorList";
+import GlobalApi from "./_utils/GlobalApi";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   const [doctorList, setDoctorList] = useState([]);
@@ -15,11 +15,9 @@ export default function Home() {
         setDoctorList(resp.data.data);
       });
     };
-  
+
     getDoctorList();
   }, []);
-
-
 
   return (
     <div>

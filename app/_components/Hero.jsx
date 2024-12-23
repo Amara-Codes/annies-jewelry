@@ -26,7 +26,7 @@ const Hero = () => {
        
         <h2 className="text-3xl font-bold sm:text-4xl">Find and Book
 
-        <span className='text-primary'> Appointment</span> with your fav 
+        <span className='text-primary'> Appointment</span> with your favorite 
         <span className='text-primary'> Doctors</span>
       </h2>
 

@@ -7,7 +7,7 @@ import CancelAppointment from "./CancelAppointment";
 import GlobalApi from "@/app/_utils/GlobalApi";
 import { toast } from "sonner";
 
-function BookingList({ bookingList, expired, updateRecord, bgGrey }) {
+function BookingList({ bookingList , expired, updateRecord, bgGrey }) {
   // console.log('Booking List : ' , bookingList);
 
   const onDeleteBooking = (item) => {
@@ -32,8 +32,7 @@ function BookingList({ bookingList, expired, updateRecord, bgGrey }) {
           >
             <Image
               src={
-                item.attributes.doctor.data.attributes.image.data[0].attributes
-                  .url
+                item.attributes.doctor.data.attributes.image.data[0].attributes.url
               }
               className="rounded-full h-[70px] w-[70px] object-cover"
               width={70}

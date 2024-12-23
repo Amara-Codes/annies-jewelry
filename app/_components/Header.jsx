@@ -36,7 +36,10 @@ const Header = () => {
   ];
 
   const session = useSession();
-  const user = session?.user?.data;
+
+  // console.log("SESSION FROM HEADER : " , session); 
+
+  const user = session?.user?.data || session?.user ;
 
   const router = useRouter();
 
@@ -76,12 +79,12 @@ const Header = () => {
       <div className="flex justify-center content-center my-auto">
         {user ? (
           <div className="flex items-center justify-between gap-2">
-              <h3 className="">
-                <span className="text-black font-semibold">Hello, </span>
-                <span className="text-primary font-normal uppercase drop-shadow-lg shadow-black">
-                  {user.username}
-                </span>
-              </h3>
+            <h3 className="">
+              <span className="text-black font-semibold">Hello, </span>
+              <span className="text-primary font-normal capitalize drop-shadow-lg shadow-black">
+                {user.username}
+              </span>
+            </h3>
             <Popover>
               <PopoverTrigger>
                 <Image
@@ -101,7 +104,7 @@ const Header = () => {
                     href="/my-booking"
                     className="cursor-pointer hover:bg-slate-100 p-2 rounded-md"
                   >
-                    My Booking
+                    My Bookings
                   </Link>
                   <li className="cursor-pointer hover:bg-slate-100 p-2 rounded-md">
                     <button className="border-none" onClick={logoutHandler}>
@@ -114,9 +117,11 @@ const Header = () => {
           </div>
         ) : (
           <>
+          <Link href="/login">
             <Button>
-              <Link href="/login">Login</Link>
+              Login
             </Button>
+          </Link>
           </>
         )}
         <ul className="block md:hidden ml-5 my-auto">
