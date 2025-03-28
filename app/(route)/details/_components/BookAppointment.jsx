@@ -73,9 +73,6 @@ function BookAppointment({doctor}) {
       const docDetails = `Your Appointment with doctor ${doctor.attributes.name} has been confirmed! On Date : ${date} At ${selectedTimeSlot} with Your Note : ` ; 
 
       const templateParams = {
-        to_name: user.username || "",
-        from_email: user.email || "",
-        from_name: 'Doctor Appointment App',
         message: docDetails + note,
       }; 
       
