@@ -53,16 +53,17 @@ const CategorySearch = () => {
               {categoryList.length>0?
               categoryList.map((item,index)=>index<6&&(
 
-                <Link  key={index} href={'/search/'+item.attributes.name} className='flex 
+                <Link  key={index} href={'/search/'+item.name} className='flex 
                 flex-col text-center items-center
                 p-5 bg-blue-50 m-2 rounded-lg cursor-pointer
                 gap-2 hover:scale-110 transition-all ease-in-out'>
-                  <Image src={item.attributes?.Icon?.data.attributes?.url}
+                  <Image src={item.icon[0]?.formats?.thumbnail?.url}
                   alt='icon'
                   width={40}
                   height={40}/>
                    <label className="text-xs sm:text-sm font-bold capitalize ">
-                  {item.attributes?.name} 
+                  {item.name} {JSON.stringify(item)}
+
                     </label>
                 </Link>
               ))

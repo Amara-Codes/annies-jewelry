@@ -43,19 +43,19 @@ function CategoryList() {
                 <CommandGroup heading="Suggestions" >
                     {categoryList&&categoryList.map((item,index)=>(
                         <CommandItem key={index}>
-                            <Link href={'/search/'+item?.attributes?.name}
+                            <Link href={'/search/'+JSON.stringify(item)}
                             className={`p-2 flex gap-2
                             text-[14px]
                             text-blue-600
                             items-center
                             rounded-md cursor-pointer w-full
-                            ${category==item.attributes.name&&'bg-blue-100'}
+                            
                             `}>
                                 <Image src={item.attributes?.Icon?.data.attributes?.url}
                                 alt='icon'
                                 width={25}
                                 height={25}/>
-                                <label className='capitalize text-black'>{item.attributes.name}</label>
+                                <label className='capitalize text-black'>{item.attributes.name?? JSON.stringify(item)}</label>
                             </Link>
                         </CommandItem>
                     ))}

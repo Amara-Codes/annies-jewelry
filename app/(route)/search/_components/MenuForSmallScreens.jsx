@@ -50,13 +50,13 @@ export function DropdownMenuRadioGroupDemo() {
                 text-blue-600
                 items-center
                 rounded-md cursor-pointer w-full
-                ${category==item.attributes.name&&'bg-blue-100'}
+               
                 `}>
                 <Image src={item.attributes?.Icon?.data.attributes?.url}
                 alt='icon'
                 width={15}
                 height={15}/>
-                <label className='capitalize text-black'>{item.attributes.name}</label>
+                <label className='capitalize text-black'>{JSON.stringify(item)}</label>
                 </Link>
             </DropdownMenuRadioItem>
           ))

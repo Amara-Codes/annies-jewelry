@@ -37,14 +37,14 @@ function DoctorList({ doctorList, heading = "Popular Doctors" }) {
                     </Link>
                     <div className="mt-3 flex flex-col flex-grow">
                       <h2 className="text-[12px] bg-blue-100 p-1 rounded-full px-2 text-primary font-bold my-2 mb-3">
-                        {doctor.attributes.name}
+                        {JSON.stringify(doctor)}
                       </h2>
-                      <h2 className="font-bold">{doctor.attributes.name}</h2>
+                      <h2 className="font-bold">{JSON.stringify(doctor)}</h2>
                       <h2 className="text-primary text-sm mb-2">
-                        {doctor.attributes.year_of_experience} YOE
+                        "doctor.attributes.year_of_experience" YOE
                       </h2>
                       <h2 className="text-gray-500 text-sm flex-grow">
-                        {doctor.attributes.about}
+                        "doctor.attributes.about"
                       </h2>
                     </div>
                     <Link

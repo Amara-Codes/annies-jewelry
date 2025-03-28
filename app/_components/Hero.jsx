@@ -10,35 +10,33 @@ const Hero = () => {
 
   return (
     <section>
-  <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
-    <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16">
-      <div className="relative h-64 overflow-hidden rounded-lg sm:h-80 lg:order-last lg:h-full">
+    <div className="w-full">
+      <div className="relative h-80 sm:h-96 lg:h-[600px]">
         <Image
           alt="doctor-image"
           src="/doctors.jpg"
-          height={800}
-          width={800}
+          height={600}
+          width={1200}
           className="absolute inset-0 h-full w-full object-cover"
         />
-      </div>
-
-      <div className="lg:py-24">
-       
-        <h2 className="text-3xl font-bold sm:text-4xl">Find and Book
-
-        <span className='text-primary'> Appointment</span> with your favorite 
-        <span className='text-primary'> Doctors</span>
-      </h2>
-
-        <p className="mt-4 text-gray-600">
-        Easily find and book appointments with your favorite doctors at your convenience. Simplify your healthcare experience with our seamless scheduling platform.
-        </p>
-
-        <Button className="mt-10"><Link href="/explore">Explore Now</Link></Button>
+        <div className="absolute inset-0 bg-black opacity-40"></div> {/* Semi-transparent overlay */}
+        <div className="absolute inset-0 flex items-center justify-center text-center text-white px-4 py-6 sm:px-8 sm:py-12">
+          <div className="max-w-lg">
+            <h2 className="text-3xl font-bold sm:text-4xl mb-4">
+             Annie's Jewelry 
+            </h2>
+            <p className="text-lg sm:text-xl mb-8">
+              Craft Jewelry in Siem Reap
+            </p>
+            <Button className="mt-10">
+              <Link href="/explore">Book your appointment now</Link>
+            </Button>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+  
   )
 }
 

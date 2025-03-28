@@ -23,7 +23,6 @@ export default function Home() {
     <div>
       <Hero />
       <CategorySearch />
-      {doctorList.length > 0 && <DoctorList doctorList={doctorList} />}
     </div>
   );
 }

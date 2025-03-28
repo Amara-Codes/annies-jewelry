@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
       <html lang="en">
         <body className={outfit.className}>
           <SessionValidator>
-            <div className="md:px-20">{children}</div>
+            <div className="">{children}</div>
           </SessionValidator>
         </body>
       </html>
@@ -29,7 +29,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={outfit.className}>
         <SessionValidator>
-          <div className="md:px-20">
+          <div className="">
             <Header />
             {children}
           </div>

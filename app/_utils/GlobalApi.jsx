@@ -3,13 +3,13 @@ const { default: axios } = require("axios");
 import { encrypt, setCookies, logout, getSession } from "./lib";
 
 const API_KEY = process.env.NEXT_PUBLIC_STRAPI_API_KEY;
-// const baseURL = `http://localhost:1337/api`;
-const baseURL = `https://${process.env.NEXT_PUBLIC_STRAPI_URL}/api`;
+const baseURL = `http://localhost:1337/api`;
+//const baseURL = `https://${process.env.NEXT_PUBLIC_STRAPI_URL}/api`;
 
 const axiosClient = axios.create({
   baseURL: baseURL,
   headers: {
-    Authorization: `Bearer ${process.env.NEXT_PUBLIC_STRAPI_APP_KEYS}`,
+    Authorization: `Bearer ${"caa32a7552a96e2a1766f451786d6c64d70c0fbe3fdc09942bf0a0c0fbc66088d2918bcc0ba06c2d1e4fb99730f2578e7f5e8cafe249a8bcc02a6433a7623c990f785c3baaf3d9e4ce9082136ac7460795ba99deb523357dcbdd3ea4049edffd297afbe207235b6bdb5a4c2ba703cec3a1e405853d68b2a0ac0a246e7de5673d"}`,
   },
 });
 
